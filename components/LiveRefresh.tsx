@@ -1,3 +1,4 @@
+cat > components/LiveRefresh.tsx <<'EOF'
 "use client";
 
 import { useEffect } from "react";
@@ -24,3 +25,4 @@ export default function LiveRefresh() {
 
   return null;
 }
+EOF

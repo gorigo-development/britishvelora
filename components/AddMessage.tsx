@@ -1,3 +1,4 @@
+cat > components/AddMessage.tsx <<'EOF'
 "use client";
 
 import { useState } from "react";
@@ -16,15 +17,18 @@ export default function AddMessage() {
     if (!content.trim()) return;
 
     setBusy(true);
-    const { error } = await supabase.from("messages").insert({ content });
+    // insert as array (v2)
+    const { error } = await supabase.from("messages").insert([{ content }]);
     setBusy(false);
 
     if (error) {
       setErr(error.message);
       return;
     }
+
     setContent("");
-    router.refresh(); // reload server data list
+    // small delay so server fetch sees the new row
+    setTimeout(() => router.refresh(), 200);
   }
 
   return (
@@ -63,3 +67,4 @@ export default function AddMessage() {
     </form>
   );
 }
+EOF
