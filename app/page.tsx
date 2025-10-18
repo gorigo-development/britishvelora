@@ -11,7 +11,7 @@ type Message = {
 export default async function HomePage() {
   // 🧠 Fetch messages (server-side)
   const { data, error } = await supabase
-    .from<Message>("messages")
+    .from("messages")
     .select("*")
     .order("created_at", { ascending: false });
 
