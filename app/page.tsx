@@ -5,7 +5,7 @@ type Message = { id: string; content: string; created_at: string };
 export default async function HomePage() {
   // server-side read
   const { data, error } = await supabase
-    .from<Message>("messages")
+    .from("messages")
     .select("*")
     .order("created_at", { ascending: false });
 
