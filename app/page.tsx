@@ -9,27 +9,27 @@ type Message = {
 };
 
 export default async function HomePage() {
-  // server-side read
+  // 🧠 Fetch messages (server-side)
   const { data, error } = await supabase
-    .from("messages")
+    .from<Message>("messages")
     .select("*")
     .order("created_at", { ascending: false });
 
   return (
     <main id="main" className="mx-auto max-w-5xl p-6">
+      {/* ✅ Header section */}
       <section className="rounded-2xl border border-gray-200 dark:border-gray-800 p-6 mb-6">
         <h1 className="text-3xl font-bold mb-2">
           🎉 Autopilot Build Loop is ONLINE
         </h1>
         <p className="mb-4">
-          Push to GitHub → Vercel auto-deploys. Next.js + Supabase is wired.
+          Push to GitHub → Vercel auto-deploys. Next.js + Supabase is fully wired.
         </p>
       </section>
 
+      {/* ✅ Message list */}
       <section className="rounded-2xl border border-gray-200 dark:border-gray-800 p-6">
-        <h2 className="text-2xl font-semibold mb-3">
-          📬 Messages from Supabase
-        </h2>
+        <h2 className="text-2xl font-semibold mb-3">📬 Messages from Supabase</h2>
 
         {error && (
           <p className="text-red-600" role="alert">
@@ -50,10 +50,10 @@ export default async function HomePage() {
           ))}
         </ul>
 
-        {/* Add message form */}
+        {/* ✅ Add new message form */}
         <AddMessage />
 
-        {/* Live refresh on new inserts */}
+        {/* ✅ Auto-refresh when new messages are added */}
         <LiveRefresh />
       </section>
     </main>
